@@ -577,6 +577,20 @@ section#contact h2 {
   html.menu-open {
     overflow: hidden;
   }
+      /* chybová hláška */
+.contact-form .error-msg {
+  display: none;
+  font-size: 0.85rem;
+  color: #c9a14a; /* nebo var(--gold) */
+  margin-top: 5px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* při chybě změna barvy rámečku */
+.contact-form input.error,
+.contact-form textarea.error {
+  border-color: #c9a14a; /* změní jen barvu, ne tloušťku */
+}
 
 }
 
@@ -740,12 +754,18 @@ section#contact h2 {
   <span>info@salonelegance.cz</span>
 </div>
 
-      <form class="contact-form" onsubmit="sendForm(event)">
-        <input type="text" id="name" placeholder="Jméno" required>
-        <input type="email" id="email" placeholder="E-mail" required>
-        <textarea id="message" placeholder="Zpráva" rows="4" required></textarea>
-        <button type="submit">Odeslat zprávu</button>
-      </form>
+      <form class="contact-form" onsubmit="sendForm(event)" novalidate>
+  <input type="text" id="name" placeholder="Jméno" required>
+  <span class="error-msg">Vyplňte prosím toto políčko</span>
+
+  <input type="email" id="email" placeholder="E-mail" required>
+  <span class="error-msg">Vyplňte prosím toto políčko</span>
+
+  <textarea id="message" placeholder="Zpráva" rows="4" required></textarea>
+  <span class="error-msg">Vyplňte prosím toto políčko</span>
+
+  <button type="submit">Odeslat zprávu</button>
+</form>
     </div>
   </div>
 </section>
@@ -953,9 +973,55 @@ if (window.innerWidth > 768) {
 
 });
 </script>
+
+  <script>
+function sendForm(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  let valid = true;
+
+  const fields = form.querySelectorAll("input, textarea");
+
+  fields.forEach(field => {
+    const errorMsg = field.nextElementSibling;
+
+    if (!field.checkValidity()) {
+      field.classList.add("error");
+      errorMsg.style.display = "block";
+      valid = false;
+    } else {
+      field.classList.remove("error");
+      errorMsg.style.display = "none";
+    }
+  });
+
+  if (valid) {
+    const name = document.getElementById("name").value;
+    alert("Děkujeme za zprávu, " + name + "! Brzy se vám ozveme.");
+    form.reset();
+
+    // skryje všechny hlášky po resetu
+    fields.forEach(field => {
+      field.classList.remove("error");
+      field.nextElementSibling.style.display = "none";
+    });
+  }
+}
+
+// odstranění chyby při psaní
+document.querySelectorAll(".contact-form input, .contact-form textarea")
+.forEach(field => {
+  field.addEventListener("input", () => {
+    field.classList.remove("error");
+    field.nextElementSibling.style.display = "none";
+  });
+});
+</script>
   
 </body>
 </html>
+
 
 
 
