@@ -473,23 +473,33 @@ section#contact h2 {
 }
       
       .nav-menu {
-  flex-direction: column;
-  background: white;
-  position: absolute;
-  top: 56px;                   
-  left: 0;
-  width: 100%;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  overflow: hidden;
-  max-height: 0;       /* zavřené menu */
-  opacity: 0;          /* průhledné */
-  transition: max-height 0.6s ease, opacity 0.6s ease; /* plynulá animace */
-  z-index: 999;
-}
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 56px;                   
+    left: 0;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    overflow: hidden;
+    max-height: 0;       /* zavřené menu */
+    opacity: 0;          /* průhledné */
+    transition: max-height 0.6s ease, opacity 0.6s ease; 
+    z-index: 999;
 
-.nav-menu.show {
-  max-height: 500px;   /* otevřené menu */
-  opacity: 1;          /* plně viditelné */
+    display: flex;           /* pro jistotu, už je flex */
+    align-items: center;     /* horizontálně uprostřed */
+    justify-content: center; /* vertikálně uprostřed */
+  }
+
+  .nav-menu.show {
+    max-height: 500px;   /* otevřené menu */
+    opacity: 1;          /* plně viditelné */
+  }
+
+  .nav-menu a {
+    text-align: center;  /* text odkazů na střed */
+    width: 100%;         /* klikací plocha přes celý řádek */
+  }
 }
 
   /* Hamburger ikona */
@@ -937,6 +947,7 @@ if (window.innerWidth > 768) {
   
 </body>
 </html>
+
 
 
 
