@@ -865,7 +865,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Automatické zabarvování menu podle sekce ---
+  // --- Automatické zabarvování menu podle sekce jen pro mobil ---
+if (window.innerWidth <= 768) {
   const setActiveLink = () => {
     const scrollPosition = window.scrollY + window.innerHeight / 2;
 
@@ -886,12 +887,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', setActiveLink);
   window.addEventListener('load', setActiveLink);
+}
 
 });
 </script>
   
 </body>
 </html>
+
 
 
 
