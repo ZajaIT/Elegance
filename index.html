@@ -774,40 +774,45 @@ html.menu-open {
 </script>
 
   <script>
+  window.addEventListener('DOMContentLoaded', () => {
+
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('.nav-menu');
+
   const preventScroll = (e) => {
-  e.preventDefault();
-};
+    e.preventDefault();
+  };
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('show');
-  document.body.classList.toggle('menu-open');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('show');
+    document.body.classList.toggle('menu-open');
 
-  if (document.body.classList.contains('menu-open')) {
-    // zablokuje touch / wheel scroll
-    window.addEventListener('touchmove', preventScroll, { passive: false });
-    window.addEventListener('wheel', preventScroll, { passive: false });
-  } else {
-    window.removeEventListener('touchmove', preventScroll);
-    window.removeEventListener('wheel', preventScroll);
-  }
-});
-
-// zavření menu při kliknutí na odkaz a umožnění scrollu
-document.querySelectorAll('.nav-menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('show');
-    document.body.classList.remove('menu-open');
-    window.removeEventListener('touchmove', preventScroll);
-    window.removeEventListener('wheel', preventScroll);
+    if (document.body.classList.contains('menu-open')) {
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+      window.addEventListener('wheel', preventScroll, { passive: false });
+    } else {
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('wheel', preventScroll);
+    }
   });
-});
+
+  document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('show');
+      document.body.classList.remove('menu-open');
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('wheel', preventScroll);
+    });
   });
+
+});
 </script>
   
 </body>
 </html>
+
 
 
 
