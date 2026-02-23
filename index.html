@@ -847,9 +847,9 @@ window.addEventListener('DOMContentLoaded', () => {
       toggleMenu();
     }
 
-    // Swipe zdola nahoru pro zavření menu
-    if (body.classList.contains('menu-open') && touchStartY > window.innerHeight - 100 && diffY < -50) {
-      toggleMenu();
+    // Swipe zdola nahoru (vertikální pohyb dolů -> nahoru)
+  if (body.classList.contains('menu-open') && diffY < -100) {
+    toggleMenu();
     }
   });
 
@@ -858,6 +858,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
 </body>
 </html>
+
 
 
 
