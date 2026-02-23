@@ -426,6 +426,21 @@ section#contact h2 {
       padding: 20px;
       font-size: 0.9rem;
     }
+    
+    /* chybová hláška */
+.contact-form .error-msg {
+  display: none;
+  font-size: 0.85rem;
+  color: #c9a14a; /* zlatá */
+  margin-top: 5px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* při chybě změna barvy rámečku */
+.contact-form input.error,
+.contact-form textarea.error {
+  border-color: #c9a14a;
+}
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -577,21 +592,7 @@ section#contact h2 {
   html.menu-open {
     overflow: hidden;
   }
-      /* chybová hláška */
-.contact-form .error-msg {
-  display: none;
-  font-size: 0.85rem;
-  color: #c9a14a; /* nebo var(--gold) */
-  margin-top: 5px;
-  font-family: "Montserrat", sans-serif;
-}
-
-/* při chybě změna barvy rámečku */
-.contact-form input.error,
-.contact-form textarea.error {
-  border-color: #c9a14a; /* změní jen barvu, ne tloušťku */
-}
-      
+           
 }
 
   </style>
@@ -1021,6 +1022,7 @@ document.querySelectorAll(".contact-form input, .contact-form textarea")
   
 </body>
 </html>
+
 
 
 
