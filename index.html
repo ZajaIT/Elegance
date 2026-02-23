@@ -462,36 +462,39 @@ section#contact h2 {
 }
 
     @media (max-width: 768px) {
-  /* Schovat standardní menu */
 
-.nav-phone {
-  display: none; /* telefonní číslo zmizí jen na mobilu */
-}
-      
-      nav {
-  padding: 30px 0; /* původní výška pruhu */
-}
-      
-      .nav-menu {
+  /* Změny headeru a navbaru pro mobil */
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  nav {
+    padding: 30px 0; /* výška pruhu */
+  }
+
+  .nav-phone {
+    display: none; /* telefon zmizí jen na mobilu */
+  }
+
+  /* Mobilní menu */
+  .nav-menu {
     flex-direction: column;
+    display: flex;
+    align-items: center;        /* položky horizontálně uprostřed */
+    justify-content: center;    /* vertikálně uprostřed */
+    padding-top: 20px;          /* prostor nad Úvod */
+    padding-bottom: 20px;       /* prostor pod Kontakt */
     background: white;
     position: absolute;
-    top: 56px;                   
+    top: 56px;
     left: 0;
     width: 100%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     overflow: hidden;
-    max-height: 0;       
-    opacity: 0;          
-    transition: max-height 0.6s ease, opacity 0.6s ease; 
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.6s ease, opacity 0.6s ease;
     z-index: 999;
-
-    /* Tohle platí jen pro mobil! */
-    display: flex;
-    align-items: center;     /* horizontálně uprostřed */
-    justify-content: center; /* vertikálně uprostřed */
-    padding-top: 20px;       /* prostor nad Úvod */
-    padding-bottom: 20px;    /* prostor pod Kontakt */
   }
 
   .nav-menu.show {
@@ -503,7 +506,20 @@ section#contact h2 {
     text-align: center;
     width: 100%;
   }
-}
+
+  /* Úvod – aktivní barva nechceme, jen hover */
+  .nav-menu a[href="#home"] {
+    color: var(--dark);
+  }
+
+  .nav-menu a[href="#home"]:hover {
+    color: var(--gold);
+  }
+
+  /* Ostatní položky aktivní */
+  .nav-menu a:not([href="#home"]).active {
+    color: var(--gold);
+  }
 
   /* Hamburger ikona */
   .hamburger {
@@ -522,14 +538,13 @@ section#contact h2 {
 
   .hamburger span {
     display: block;
-    height: 4px;           /* tlustší čáry */
+    height: 4px;
     width: 100%;
     background: var(--dark);
-    border-radius: 5px;    /* více zaoblené konce */
+    border-radius: 5px;
     transition: 0.4s;
-}
+  }
 
-  /* Animace pro otevření hamburgeru */
   .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }
@@ -540,38 +555,28 @@ section#contact h2 {
     transform: rotate(-45deg) translate(5px, -5px);
   }
 
-        /* Individuální velikost ikon pro mobil */
-  .nav-social a:nth-child(1) svg { /* Facebook */
-    width: 30px;
-    height: 30px;
+  /* Sociální ikony – mobil */
+  .nav-social {
+    left: 15px;
+    top: 50%;
+    transform: translateY(-40%);
   }
 
-  .nav-social a:nth-child(2) svg { /* Instagram */
-    width: 24px;
-    height: 24px;
+  .nav-social a:nth-child(1) svg { width: 30px; height: 30px; } /* Facebook */
+  .nav-social a:nth-child(2) svg { width: 24px; height: 24px; } /* Instagram */
+  .nav-social a:nth-child(3) svg { width: 24px; height: 24px; } /* WhatsApp */
+
+  /* Header pozice pro mobil */
+  header {
+    background-position: center top;
+    margin-top: -50px;
   }
 
-  .nav-social a:nth-child(3) svg { /* WhatsApp */
-    width: 24px;
-    height: 24px;
+  body.menu-open,
+  html.menu-open {
+    overflow: hidden;
   }
-      .nav-social {
-  left: 15px;   /* menší číslo = víc doleva, původně bylo 30px */
-  top: 50%;
-  transform: translateY(-40%);
-}
-      header {
-  background-position: center top;
-  margin-top: -50px;
-}
-      body.menu-open,
-html.menu-open {
-  overflow: hidden;
-}
-        /* Aktivní odkaz pouze pro mobil – zlatá barva */
-  .nav-menu a.active {
-    color: var(--gold); /* zlatá barva z root */
-  }
+
 }
 
   </style>
@@ -950,6 +955,7 @@ if (window.innerWidth > 768) {
   
 </body>
 </html>
+
 
 
 
