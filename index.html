@@ -577,35 +577,6 @@ section#contact h2 {
   html.menu-open {
     overflow: hidden;
   }
-      .contact-form .input-wrapper {
-  position: relative;      /* potřeba pro tooltip */
-  margin-bottom: 15px;     /* malá mezera mezi políčky */
-}
-
-.contact-form .tooltip-error {
-  position: absolute;
-  background: var(--gold); /* zlatý pruh jako u webu */
-  color: white;
-  font-size: 0.85rem;
-  font-family: "Montserrat", sans-serif;
-  padding: 6px 10px;
-  border-radius: 5px;
-  top: -35px;              /* nad políčkem */
-  left: 0;
-  white-space: nowrap;     /* nechceme zalomení textu */
-  opacity: 0;              /* defaultně skrytý */
-  pointer-events: none;    /* neblokuje kliknutí */
-  transition: opacity 0.3s ease;
-  z-index: 10;
-}
-
-.contact-form .input-error {
-  border-color: var(--gold); /* zlatý rámeček při chybě */
-}
-
-.contact-form .input-error .tooltip-error {
-  opacity: 1;              /* zobrazí tooltip */
-}
 
 }
 
@@ -769,26 +740,12 @@ section#contact h2 {
   <span>info@salonelegance.cz</span>
 </div>
 
-      <form class="contact-form" onsubmit="sendForm(event)" novalidate>
-
-  <div class="input-wrapper">
-    <input type="text" id="name" placeholder="Jméno" required>
-    <span class="tooltip-error">Prosím, vyplňte toto pole</span>
-  </div>
-
-  <div class="input-wrapper">
-    <input type="email" id="email" placeholder="E-mail" required>
-    <span class="tooltip-error">Prosím, zadejte platný e-mail</span>
-  </div>
-
-  <div class="input-wrapper">
-    <textarea id="message" placeholder="Zpráva" rows="4" required></textarea>
-    <span class="tooltip-error">Prosím, napište zprávu</span>
-  </div>
-
-  <button type="submit">Odeslat zprávu</button>
-
-</form>
+      <form class="contact-form" onsubmit="sendForm(event)">
+        <input type="text" id="name" placeholder="Jméno" required>
+        <input type="email" id="email" placeholder="E-mail" required>
+        <textarea id="message" placeholder="Zpráva" rows="4" required></textarea>
+        <button type="submit">Odeslat zprávu</button>
+      </form>
     </div>
   </div>
 </section>
@@ -800,49 +757,16 @@ section#contact h2 {
 
 
   <script>
-function sendForm(e) {
-  e.preventDefault();
+    function sendForm(e) {
+      e.preventDefault();
 
-  const form = e.target;
-  let valid = true;
+      const name = document.getElementById("name").value;
 
-  // vyber všechny inputy a textarea
-  const fields = form.querySelectorAll("input, textarea");
+      alert("Děkujeme za zprávu, " + name + "! Brzy se vám ozveme.");
 
-  fields.forEach(field => {
-    const wrapper = field.closest(".input-wrapper");
-    const tooltip = wrapper.querySelector(".tooltip-error");
-
-    // kontrola validního obsahu
-    if (!field.checkValidity()) {
-      wrapper.classList.add("input-error");
-      valid = false;
-    } else {
-      wrapper.classList.remove("input-error");
+      e.target.reset();
     }
-  });
-
-  // pokud všechno validní, odešli
-  if (valid) {
-    const name = document.getElementById("name").value;
-    alert("Děkujeme za zprávu, " + name + "! Brzy se vám ozveme.");
-    form.reset();
-
-    // reset tooltipy
-    fields.forEach(field => field.closest(".input-wrapper").classList.remove("input-error"));
-  }
-}
-
-// tooltipy zmizí při psaní
-const fields = document.querySelectorAll(".contact-form input, .contact-form textarea");
-
-fields.forEach(field => {
-  field.addEventListener("input", () => {
-    const wrapper = field.closest(".input-wrapper");
-    wrapper.classList.remove("input-error");
-  });
-});
-</script>
+  </script>
 
 <script>
   // Vybereme všechny sekce s h2
@@ -1032,7 +956,6 @@ if (window.innerWidth > 768) {
   
 </body>
 </html>
-
 
 
 
