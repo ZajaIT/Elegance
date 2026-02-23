@@ -548,6 +548,10 @@ section#contact h2 {
   background-position: center top;
   margin-top: -50px;
 }
+      body.menu-open {
+  position: fixed;
+  width: 100%;
+}
 }
 
   </style>
@@ -793,18 +797,13 @@ section#contact h2 {
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('show');
-
-    // Zamknutí scrollu jen když je menu otevřené
-    if (navMenu.classList.contains('show')) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.classList.toggle('menu-open');
   });
 </script>
   
 </body>
 </html>
+
 
 
 
