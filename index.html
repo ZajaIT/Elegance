@@ -548,8 +548,10 @@ section#contact h2 {
   background-position: center top;
   margin-top: -50px;
 }
-      body.menu-open {
+      body.menu-open,
+html.menu-open {
   overflow: hidden;
+  height: 100%;
 }
 }
 
@@ -797,11 +799,13 @@ section#contact h2 {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('show');
     document.body.classList.toggle('menu-open');
+    document.documentElement.classList.toggle('menu-open');
   });
 </script>
   
 </body>
 </html>
+
 
 
 
