@@ -791,13 +791,21 @@ section#contact h2 {
   const navMenu = document.querySelector('.nav-menu');
 
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active'); // změní hamburger na křížek
-    navMenu.classList.toggle('show');     // vysune nebo skryje menu
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('show');
+
+    // Zamknutí scrollu jen když je menu otevřené
+    if (navMenu.classList.contains('show')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   });
 </script>
   
 </body>
 </html>
+
 
 
 
