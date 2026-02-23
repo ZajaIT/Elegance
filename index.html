@@ -481,24 +481,27 @@ section#contact h2 {
     width: 100%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     overflow: hidden;
-    max-height: 0;       /* zavřené menu */
-    opacity: 0;          /* průhledné */
+    max-height: 0;       
+    opacity: 0;          
     transition: max-height 0.6s ease, opacity 0.6s ease; 
     z-index: 999;
 
-    display: flex;           /* pro jistotu, už je flex */
+    /* Tohle platí jen pro mobil! */
+    display: flex;
     align-items: center;     /* horizontálně uprostřed */
     justify-content: center; /* vertikálně uprostřed */
+    padding-top: 20px;       /* prostor nad Úvod */
+    padding-bottom: 20px;    /* prostor pod Kontakt */
   }
 
   .nav-menu.show {
-    max-height: 500px;   /* otevřené menu */
-    opacity: 1;          /* plně viditelné */
+    max-height: 500px;
+    opacity: 1;
   }
 
   .nav-menu a {
-    text-align: center;  /* text odkazů na střed */
-    width: 100%;         /* klikací plocha přes celý řádek */
+    text-align: center;
+    width: 100%;
   }
 }
 
@@ -947,6 +950,7 @@ if (window.innerWidth > 768) {
   
 </body>
 </html>
+
 
 
 
