@@ -463,60 +463,16 @@ section#contact h2 {
 
     @media (max-width: 768px) {
 
-  /* Změny headeru a navbaru pro mobil */
+  /* Header */
   header h1 {
     font-size: 2.2rem;
   }
 
+  /* Navbar */
   nav {
     padding: 30px 0; /* výška pruhu */
-  }
-
-  .nav-phone {
-    display: none; /* telefon zmizí jen na mobilu */
-  }
-
-  /* Mobilní menu - plynulé otevírání */
-.nav-menu {
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background: white;
-  position: absolute;
-  top: 56px;
-  left: 0;
-  width: 100%;
-  transform: translateY(-100%); /* skryté nahoře */
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  z-index: 998;
-}
-
-.nav-menu.show {
-  transform: translateY(0); /* zajede dolů */
-  opacity: 1;
-}
-
-  .nav-menu a {
-    text-align: center;
-    width: 100%;
-  }
-
-  /* Úvod – aktivní barva nechceme, jen hover */
-  .nav-menu a[href="#home"] {
-    color: var(--dark);
-  }
-
-  .nav-menu a[href="#home"]:hover {
-    color: var(--gold);
-  }
-
-  /* Ostatní položky aktivní */
-  .nav-menu a:not([href="#home"]).active {
-    color: var(--gold);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* stín zachován */
+    z-index: 1000;
   }
 
   /* Hamburger ikona */
@@ -531,7 +487,7 @@ section#contact h2 {
     cursor: pointer;
     flex-direction: column;
     justify-content: space-between;
-    z-index: 1001;
+    z-index: 1001; /* nad nav pruhem */
   }
 
   .hamburger span {
@@ -553,28 +509,64 @@ section#contact h2 {
     transform: rotate(-45deg) translate(5px, -5px);
   }
 
-  /* Sociální ikony – mobil */
+  /* Sociální ikony */
   .nav-social {
     left: 15px;
     top: 50%;
-    transform: translateY(-40%);
+    transform: translateY(-50%);
+    z-index: 1001; /* nad menu */
   }
 
-  .nav-social a:nth-child(1) svg { width: 30px; height: 30px; } /* Facebook */
-  .nav-social a:nth-child(2) svg { width: 24px; height: 24px; } /* Instagram */
-  .nav-social a:nth-child(3) svg { width: 24px; height: 24px; } /* WhatsApp */
+  .nav-social a:nth-child(1) svg { width: 30px; height: 30px; }
+  .nav-social a:nth-child(2) svg { width: 24px; height: 24px; }
+  .nav-social a:nth-child(3) svg { width: 24px; height: 24px; }
 
-  /* Header pozice pro mobil */
-  header {
-    background-position: center top;
-    margin-top: -50px;
+  /* Mobilní menu - plynulé vyjíždění */
+  .nav-menu {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: white;
+    position: absolute;
+    top: 56px;           /* přímo pod nav pruh */
+    left: 0;
+    width: 100%;
+    transform: translateY(-100%); /* skryté nahoře */
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    z-index: 999;        /* pod nav pruhem, aby stín byl vidět */
+  }
+
+  .nav-menu.show {
+    transform: translateY(0); /* zajede dolů */
+    opacity: 1;
+  }
+
+  .nav-menu a {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Úvod – aktivní barva nechceme, jen hover */
+  .nav-menu a[href="#home"] {
+    color: var(--dark);
+  }
+  .nav-menu a[href="#home"]:hover {
+    color: var(--gold);
+  }
+
+  /* Ostatní položky aktivní */
+  .nav-menu a:not([href="#home"]).active {
+    color: var(--gold);
   }
 
   body.menu-open,
   html.menu-open {
     overflow: hidden;
   }
-
 }
 
   </style>
@@ -953,6 +945,7 @@ if (window.innerWidth > 768) {
   
 </body>
 </html>
+
 
 
 
