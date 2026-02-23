@@ -819,17 +819,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // --- Kliknutí na link v menu ---
   navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      // Odstraníme active ze všech odkazů
-      navLinks.forEach(a => a.classList.remove('active'));
+  link.addEventListener('click', (e) => {
+    // Odstraníme active ze všech odkazů
+    navLinks.forEach(a => a.classList.remove('active'));
 
-      // Přidáme active kliknutému odkazu
+    // Přidáme active kliknutému odkazu jen pokud to není Úvod
+    if (link.getAttribute('href') !== '#home') {
       e.currentTarget.classList.add('active');
+    }
 
-      // Zavření menu, pokud je otevřené
-      if (body.classList.contains('menu-open')) toggleMenu();
-    });
+    // Zavření menu, pokud je otevřené
+    if (body.classList.contains('menu-open')) toggleMenu();
   });
+});
 
   // --- Kliknutí mimo menu zavře ho ---
   document.addEventListener('click', (e) => {
@@ -898,6 +900,7 @@ if (window.innerWidth <= 768) {
   
 </body>
 </html>
+
 
 
 
