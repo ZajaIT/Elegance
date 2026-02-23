@@ -762,23 +762,6 @@ html.menu-open {
 </script>
 
 <script>
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
-
-  // Vrátí stránku vždy na začátek při načtení
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
-
-    checkSections();
-    checkGallery();
-  });
-
-</script>
-
-<script>
   const textarea = document.getElementById("message");
 
   textarea.addEventListener("input", autoResize);
@@ -805,6 +788,7 @@ html.menu-open {
   
 </body>
 </html>
+
 
 
 
