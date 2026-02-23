@@ -901,36 +901,43 @@ window.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', setActiveLinkMobile);
   }
 
-  // --- Automatické zabarvování menu podle sekce pro desktop ---
-  if (window.innerWidth > 768) {
-    const setActiveLinkDesktop = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+ // --- Automatické zabarvování menu podle sekce pro desktop ---
+if (window.innerWidth > 768) {
+  const setActiveLinkDesktop = () => {
+    const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
+    // Pokud jsme úplně nahoře, žádný active
+    if (window.scrollY < 50) { // 50px tolerance
+      navLinks.forEach(link => link.classList.remove('active'));
+      return;
+    }
 
-        const activeLink = document.querySelector(`.nav-menu a[href="#${section.id}"]`);
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
 
-        // Ignorujeme Úvod (#home)
-        if (!activeLink || section.id === 'home') return;
+      const activeLink = document.querySelector(`.nav-menu a[href="#${section.id}"]`);
 
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          navLinks.forEach(link => link.classList.remove('active'));
-          activeLink.classList.add('active');
-        }
-      });
-    };
+      // Ignorujeme Úvod (#home)
+      if (!activeLink || section.id === 'home') return;
 
-    window.addEventListener('scroll', setActiveLinkDesktop);
-    window.addEventListener('load', setActiveLinkDesktop);
-  }
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        activeLink.classList.add('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', setActiveLinkDesktop);
+  window.addEventListener('load', setActiveLinkDesktop);
+}
 
 });
 </script>
   
 </body>
 </html>
+
 
 
 
