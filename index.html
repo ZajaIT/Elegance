@@ -200,6 +200,9 @@ header p {
     nav a:hover {
       color: var(--gold);
     }
+    .nav-menu a.active {
+  color: var(--gold);
+}
 
     /* Sections */
     section {
@@ -788,10 +791,12 @@ window.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.nav-menu');
   const body = document.body;
+  const navLinks = document.querySelectorAll('.nav-menu a');
+  const sections = document.querySelectorAll('section');
 
   const preventScroll = (e) => e.preventDefault();
 
-  // Otevření / zavření hamburgeru
+  // --- Otevření / zavření hamburgeru ---
   const toggleMenu = () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('show');
@@ -808,14 +813,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
   hamburger.addEventListener('click', toggleMenu);
 
-  // Zavření menu kliknutím na link
-  document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
+  // --- Kliknutí na link v menu ---
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Odstraníme active ze všech odkazů
+      navLinks.forEach(a => a.classList.remove('active'));
+
+      // Přidáme active kliknutému odkazu
+      e.currentTarget.classList.add('active');
+
+      // Zavření menu, pokud je otevřené
       if (body.classList.contains('menu-open')) toggleMenu();
     });
   });
 
-  // Zavření menu kliknutím mimo menu
+  // --- Kliknutí mimo menu zavře ho ---
   document.addEventListener('click', (e) => {
     if (
       body.classList.contains('menu-open') &&
@@ -826,7 +838,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Swipe gesta
+  // --- Swipe gesta ---
   let touchStartX = 0;
   let touchStartY = 0;
 
@@ -848,16 +860,39 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // Swipe zdola nahoru (vertikální pohyb dolů -> nahoru)
-  if (body.classList.contains('menu-open') && diffY < -100) {
-    toggleMenu();
+    if (body.classList.contains('menu-open') && diffY < -100) {
+      toggleMenu();
     }
   });
+
+  // --- Automatické zabarvování menu podle sekce ---
+  const setActiveLink = () => {
+    const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        // Odstraníme active ze všech
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        // Najdeme odpovídající odkaz podle href
+        const activeLink = document.querySelector(`.nav-menu a[href="#${section.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', setActiveLink);
+  window.addEventListener('load', setActiveLink);
 
 });
 </script>
   
 </body>
 </html>
+
 
 
 
