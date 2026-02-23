@@ -787,33 +787,70 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.nav-menu');
+  const body = document.body;
 
-  const preventScroll = (e) => {
-    e.preventDefault();
-  };
+  const preventScroll = (e) => e.preventDefault();
 
-  hamburger.addEventListener('click', () => {
+  // Otevření / zavření hamburgeru
+  const toggleMenu = () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('show');
-    document.body.classList.toggle('menu-open');
+    body.classList.toggle('menu-open');
 
-    if (document.body.classList.contains('menu-open')) {
+    if (body.classList.contains('menu-open')) {
       window.addEventListener('touchmove', preventScroll, { passive: false });
       window.addEventListener('wheel', preventScroll, { passive: false });
     } else {
       window.removeEventListener('touchmove', preventScroll);
       window.removeEventListener('wheel', preventScroll);
     }
-  });
+  };
 
+  hamburger.addEventListener('click', toggleMenu);
+
+  // Zavření menu kliknutím na link
   document.querySelectorAll('.nav-menu a').forEach(link => {
     link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navMenu.classList.remove('show');
-      document.body.classList.remove('menu-open');
-      window.removeEventListener('touchmove', preventScroll);
-      window.removeEventListener('wheel', preventScroll);
+      if (body.classList.contains('menu-open')) toggleMenu();
     });
+  });
+
+  // Zavření menu kliknutím mimo menu
+  document.addEventListener('click', (e) => {
+    if (
+      body.classList.contains('menu-open') &&
+      !navMenu.contains(e.target) &&
+      !hamburger.contains(e.target)
+    ) {
+      toggleMenu();
+    }
+  });
+
+  // Swipe gesta
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  window.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  });
+
+  window.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+
+    // Swipe z levé strany doprava pro zavření menu
+    if (body.classList.contains('menu-open') && touchStartX < 100 && diffX > 50) {
+      toggleMenu();
+    }
+
+    // Swipe zdola nahoru pro zavření menu
+    if (body.classList.contains('menu-open') && touchStartY > window.innerHeight - 100 && diffY < -50) {
+      toggleMenu();
+    }
   });
 
 });
@@ -821,6 +858,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
 </body>
 </html>
+
 
 
 
